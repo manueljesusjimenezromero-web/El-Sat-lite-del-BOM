@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventana madre</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      gap: 1rem;
+      text-align: center;
+      background: #0f172a;
+      color: #e2e8f0;
+    }
+    button {
+      padding: .8rem 1.6rem;
+      font-size: 1rem;
+      border: 0;
+      border-radius: 8px;
+      background: #38bdf8;
+      color: #0f172a;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #7dd3fc; }
+  </style>
+</head>
+<body>
+  <h1>Ventana madre</h1>
+  <button id="btnLanzar">Lanzar Ventana Satélite</button>
+
+  <script>
+    const ANCHO = 400;
+    const ALTO = 300;
+
+    document.getElementById("btnLanzar").addEventListener("click", function () {
+      // Espacio libre a cada lado = (pantalla - ventana) / 2
+      const izquierda = Math.floor((screen.availWidth - ANCHO) / 2);
+      const arriba = Math.floor((screen.availHeight - ALTO) / 2);
+
+      const caracteristicas =
+        "width=" + ANCHO + ",height=" + ALTO +
+        ",left=" + izquierda + ",top=" + arriba;
+
+      window.open("satelite.html", "satelite", caracteristicas);
+    });
+  </script>
+</body>
+</html>
