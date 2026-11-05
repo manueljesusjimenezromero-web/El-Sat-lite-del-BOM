@@ -43,57 +43,57 @@
   <h1>Ventana satélite</h1>
   <p id="bienvenida"></p>
 
-  <button onclick="fccon()" id="btnCon">Redirigir con Historial</button>
-  <button onclick="fcsin()" id="btnSin">Redirigir sin Historial</button>
-  <button onclick="fcdes()" id="btnDestruir">Autodestrucción en 5 segundos</button>
+  <button onclick="redirigirConHistorial()" id="btnCon">Redirigir con Historial</button>
+  <button onclick="redirigirSinHistorial()" id="btnSin">Redirigir sin Historial</button>
+  <button onclick="autodestruccion()" id="btnDestruir">Autodestrucción en 5 segundos</button>
 
-  <p id="cAtras"></p>
+  <p id="cuentaAtras"></p>
 
   <script>
     const URL_ILERNA = "https://www.ilerna.es";
-    const cAtras =document.getElementById("cAtras")
-    const agente = navigator.userAgent;
-    let sistema = "un sistema desconocido";
+    const parrafoCuentaAtras =document.getElementById("cuentaAtras")
+    const agenteUsuario = navigator.userAgent;
+    let sistemaOperativo = "un sistema desconocido";
 
-    if (agente.indexOf("Windows") !== -1) {
-      sistema = "Windows";
-    } else if (agente.indexOf("Mac") !== -1) {
-      sistema = "Mac";
-    } else if (agente.indexOf("Linux") !== -1) {
-      sistema = "Linux";
+    if (agenteUsuario.indexOf("Windows") !== -1) {
+      sistemaOperativo = "Windows";
+    } else if (agenteUsuario.indexOf("Mac") !== -1) {
+      sistemaOperativo = "Mac";
+    } else if (agenteUsuario.indexOf("Linux") !== -1) {
+      sistemaOperativo = "Linux";
     }
-    document.getElementById("bienvenida").textContent = "¡Bienvenido! Estás navegando desde " + sistema + ".";
-    function hayMadre() {
+    document.getElementById("bienvenida").textContent = "¡Bienvenido! Estás navegando desde " + sistemaOperativo + ".";
+    function hayVentanaMadre() {
       if (!window.opener || window.opener.closed) {
         alert("No hay ventana madre. Abre esta página desde index.html.");
         return false;
       }
       return true;
     };
-    function fccon(){
-      if (hayMadre()) {
+    function redirigirConHistorial(){
+      if (hayVentanaMadre()) {
         window.opener.location.assign(URL_ILERNA);
       }
     };
-    function fcsin(){
-      if (hayMadre()) {
+    function redirigirSinHistorial(){
+      if (hayVentanaMadre()) {
         window.opener.location.replace(URL_ILERNA);
       }
     };
 
 
-    function fcdes(segundos=5){
-      if (segundos == 0) {
-        cAtras.textContent = "¡Adiós!";
+    function autodestruccion(segundosRestantes=5){
+      if (segundosRestantes == 0) {
+        parrafoCuentaAtras.textContent = "¡Adiós!";
         setTimeout(function () {
           window.close();              
           return;
         }, 1000);
       }
       else {
-        cAtras.textContent = "Autodestrucción en " + segundos + "...";
+        parrafoCuentaAtras.textContent = "Autodestrucción en " + segundosRestantes + "...";
         setTimeout(function () {
-          fcdes(segundos - 1);    
+          autodestruccion(segundosRestantes - 1);    
         }, 1000);
       }
       

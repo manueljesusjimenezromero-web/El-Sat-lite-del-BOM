@@ -65,19 +65,19 @@
     <span class="etiqueta">Práctica BOM</span>
     <h1>Ventana madre</h1>
     <p>Desde aquí lanzamos la ventana satélite, de 400x300 px, centrada en tu monitor.</p>
-    <button onclick="boton()" id="btnLanzar">Lanzar Ventana Satélite</button>
+    <button onclick="lanzarSatelite()" id="btnLanzar">Lanzar Ventana Satélite</button>
   </main>
 
   <script>
-    function boton(){
-      const lanzar = document.getElementById("btnLanzar");
-      const ancho=400;
-      const alto =300;
-      const izquierda = Math.floor((screen.availWidth - ancho) / 2);
-      const arriba = Math.floor((screen.availHeight - alto) / 2);
-      const caracteristicas =
-        "popup,width=" + ancho + ",height=" + alto +",left=" + izquierda + ",top=" + arriba;
-      let ventana = window.open("satelite.html","satelite",caracteristicas);
+    function lanzarSatelite(){
+      const botonLanzar = document.getElementById("btnLanzar");
+      const anchoVentana=400;
+      const altoVentana =300;
+      const posicionIzquierda = Math.floor((screen.availWidth - anchoVentana) / 2);
+      const posicionArriba = Math.floor((screen.availHeight - altoVentana) / 2);
+      const caracteristicasVentana =
+        "popup,width=" + anchoVentana + ",height=" + altoVentana +",left=" + posicionIzquierda + ",top=" + posicionArriba;
+      let ventanaSatelite = window.open("satelite.html","satelite",caracteristicasVentana);
     }
   </script>
 </body>
