@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Satélite</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    h1 { margin: 0; font-size: 1.2rem; }
+
+    #bienvenida { margin: 0; font-size: .95rem; color: #2563eb; }
+
+    #cuentaAtras { margin: 0; min-height: 1.2em; font-weight: 600; color: #dc2626; }
+
+    button {
+      padding: .55rem .8rem;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #fff;
+      background: #2563eb;
+      border: 0;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #1d4ed8; }
+    button:disabled { background: #94a3b8; cursor: default; }
+
+    #btnDestruir { background: #dc2626; }
+    #btnDestruir:hover { background: #b91c1c; }
+  </style>
+</head>
+<body>
+  <h1>Ventana satélite</h1>
+  <p id="bienvenida"></p>
+
+  <button onclick="fccon()" id="btnCon">Redirigir con Historial</button>
+  <button onclick="fcsin()" id="btnSin">Redirigir sin Historial</button>
+  <button onclick="fcdes()" id="btnDestruir">Autodestrucción en 5 segundos</button>
+
+  <p id="cAtras"></p>
+
+  <script>
+    const URL_ILERNA = "https://www.ilerna.es";
+    const cAtras =document.getElementById("cAtras")
+    const agente = navigator.userAgent;
+    let sistema = "un sistema desconocido";
+
+    if (agente.indexOf("Windows") !== -1) {
+      sistema = "Windows";
+    } else if (agente.indexOf("Mac") !== -1) {
+      sistema = "Mac";
+    } else if (agente.indexOf("Linux") !== -1) {
+      sistema = "Linux";
+    }
+    document.getElementById("bienvenida").textContent = "¡Bienvenido! Estás navegando desde " + sistema + ".";
+    function hayMadre() {
+      if (!window.opener || window.opener.closed) {
+        alert("No hay ventana madre. Abre esta página desde index.html.");
+        return false;
+      }
+      return true;
+    };
+    function fccon(){
+      if (hayMadre()) {
+        window.opener.location.assign(URL_ILERNA);
+      }
+    };
+    function fcsin(){
+      if (hayMadre()) {
+        window.opener.location.replace(URL_ILERNA);
+      }
+    };
+
+
+    function fcdes(segundos=5){
+      if (segundos == 0) {
+        cAtras.textContent = "¡Adiós!";
+        setTimeout(function () {
+          window.close();              
+          return;
+        }, 1000);
+      }
+      else {
+        cAtras.textContent = "Autodestrucción en " + segundos + "...";
+        setTimeout(function () {
+          fcdes(segundos - 1);    
+        }, 1000);
+      }
+      
+      
+    };
+  </script>
+</body>
+</html>

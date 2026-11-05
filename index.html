@@ -5,51 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ventana madre</title>
   <style>
+    * { box-sizing: border-box; }
+
     body {
-      font-family: system-ui, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       margin: 0;
-      gap: 1rem;
-      text-align: center;
-      background: #0f172a;
-      color: #e2e8f0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      font-family: "Courier New", monospace;
+      background: #f5f0e6;
+      color: #1a1a1a;
     }
+
+    .caja {
+      width: 100%;
+      max-width: 460px;
+      padding: 2rem;
+      background: #fffdf7;
+      border: 3px solid #1a1a1a;
+      box-shadow: 8px 8px 0 #1a1a1a;
+    }
+
+    .etiqueta {
+      display: inline-block;
+      margin-bottom: 1rem;
+      padding: .2rem .6rem;
+      font-size: .75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: #ffd23f;
+      border: 2px solid #1a1a1a;
+    }
+
+    h1 { margin: 0 0 .8rem; font-size: 1.8rem; text-transform: uppercase; }
+
+    p { margin: 0 0 1.5rem; line-height: 1.5; }
+
     button {
-      padding: .8rem 1.6rem;
+      width: 100%;
+      padding: 1rem;
+      font-family: inherit;
       font-size: 1rem;
-      border: 0;
-      border-radius: 8px;
-      background: #38bdf8;
-      color: #0f172a;
-      font-weight: 600;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      background: #ff6b6b;
+      border: 3px solid #1a1a1a;
+      box-shadow: 4px 4px 0 #1a1a1a;
       cursor: pointer;
+      transition: transform .1s, box-shadow .1s;
     }
-    button:hover { background: #7dd3fc; }
+    button:hover { background: #ff8787; }
+    button:active { transform: translate(4px, 4px); box-shadow: 0 0 0 #1a1a1a; }
   </style>
 </head>
 <body>
-  <h1>Ventana madre</h1>
-  <button id="btnLanzar">Lanzar Ventana Satélite</button>
+  <main class="caja">
+    <span class="etiqueta">Práctica BOM</span>
+    <h1>Ventana madre</h1>
+    <p>Desde aquí lanzamos la ventana satélite, de 400x300 px, centrada en tu monitor.</p>
+    <button onclick="boton()" id="btnLanzar">Lanzar Ventana Satélite</button>
+  </main>
 
   <script>
-    const ANCHO = 400;
-    const ALTO = 300;
-
-    document.getElementById("btnLanzar").addEventListener("click", function () {
-      // Espacio libre a cada lado = (pantalla - ventana) / 2
-      const izquierda = Math.floor((screen.availWidth - ANCHO) / 2);
-      const arriba = Math.floor((screen.availHeight - ALTO) / 2);
-
+    function boton(){
+      const lanzar = document.getElementById("btnLanzar");
+      const ancho=400;
+      const alto =300;
+      const izquierda = Math.floor((screen.availWidth - ancho) / 2);
+      const arriba = Math.floor((screen.availWidth - alto) / 2);
       const caracteristicas =
-        "width=" + ANCHO + ",height=" + ALTO +
-        ",left=" + izquierda + ",top=" + arriba;
-
-      window.open("satelite.html", "satelite", caracteristicas);
-    });
+        "popup,width=" + ancho + ",height=" + alto +",left=" + izquierda + ",top=" + arriba;
+      let ventana = window.open("satelite.html","satelite",caracteristicas);
+    }
   </script>
 </body>
 </html>
